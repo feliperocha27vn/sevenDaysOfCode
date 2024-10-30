@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/src/output.css" rel="stylesheet" />
+    <title>Cadastrar Pessoas</title>
+  </head>
+  <body
+    class="bg-gradient-to-t from-roxoEscuro to-roxoMedio bg-no-repeat h-screen font-mono text-branco"
+  >
+    <main class="w-full flex justify-center">
+      <div>
+        <div class="flex items-center">
+          <span class="text-7xl">Cadastro de Pessoas</span>
+          <img
+            src="user.png"
+            alt="Imagem que remete a um usuário"
+            class="w-[4rem] ml-5"
+          />
+        </div>
+        <div class="w-full flex justify-center mt-10">
+          <form class="flex flex-col w-[60%] gap-5 js-form">
+            <div class="flex flex-col space-y-5">
+              <label class="font-semibold text-xl"
+                >Digite seu nome a baixo:
+              </label>
+              <input
+                type="text"
+                class="w-full h-12 rounded-xl pl-5 outline-none text-black"
+                id="name"
+                required
+              />
+            </div>
+            <div class="flex flex-col space-y-5">
+              <label class="font-semibold text-xl"
+                >Digite sua data de nascimento a baixo:
+              </label>
+              <input
+                type="date"
+                class="w-full h-12 rounded-xl px-5 outline-none text-black"
+                id="birth-date"
+                required
+              />
+            </div>
+            <div class="w-full flex justify-center">
+              <button
+                id="submitButton"
+                class="font-bold shadow-2xl w-64 h-14 bg-roxoMedio rounded-full uppercase"
+                type="submit"
+              >
+                Salvar informações
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
