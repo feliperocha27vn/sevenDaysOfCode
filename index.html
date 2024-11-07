@@ -10,9 +10,9 @@
   <body
     class="bg-gradient-to-t from-roxoEscuro to-roxoMedio bg-no-repeat h-screen font-mono text-branco"
   >
-    <main class="w-full flex justify-center">
+    <main class="w-full flex justify-center flex-col">
       <div>
-        <div class="flex items-center">
+        <div class="flex items-center w-full justify-center">
           <span class="text-7xl">Cadastro de Pessoas</span>
           <img
             src="user.png"
@@ -66,7 +66,33 @@
           </form>
         </div>
       </div>
+      <div class="px-4 py-8 sm:px-8">
+        <table
+          class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-roxoClaro text-sm shadow-sm"
+        >
+          <thead class="bg-roxoEscuro">
+            <tr class="text-white">
+              <th
+                class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-left"
+              >
+                Nome
+              </th>
+              <th
+                class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-left"
+              >
+                Data de Nascimento
+              </th>
+            </tr>
+          </thead>
+          <tbody id="elementoContainer">
+            <tr>
+              <td class="border border-slate-300 dark:border-slate-700 p-4 text-black">Felipe</td>
+              <td class="border border-slate-300 dark:border-slate-700 p-4 text-black">26/05/2003</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js" type="module"></script>
   </body>
 </html>

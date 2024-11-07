@@ -1,3 +1,6 @@
+import criarTabela from "./criaTabela.js";
+import formatDateToBrazilian from "./dataBrasil.js";
+
 const nameInput = document.querySelector("#name");
 const birthDateInput = document.querySelector("#birth-date");
 const buttonSubmit = document.querySelector("#submitButton");
@@ -9,10 +12,10 @@ buttonSubmit.addEventListener("click", mostraDados);
 function mostraDados(event) {
   event.preventDefault();
 
-  const valueName = nameInput.value;
-  const valueBirthDate = birthDateInput.value;
+  let valueName = nameInput.value;
+  let valueBirthDate = birthDateInput.value;
 
-  const valueBirthDateFormated = formatDateToBrazilian(valueBirthDate);
+  let valueBirthDateFormated = formatDateToBrazilian(valueBirthDate);
 
   // Verifica se o nome contém apenas letras
   const apenasLetras = /^[A-Za-zÀ-ÿ\s]+$/.test(valueName);
@@ -31,30 +34,65 @@ function mostraDados(event) {
   switch (errorCode) {
     case "short":
       messageError.textContent = "O nome não pode ter menos de 3 letras";
+      containerNotification.classList.remove("hidden");
+      setTimeout(() => {
+        messageError.textContent = "";
+        containerNotification.classList.add("hidden");
+      }, 5000);
       break;
     case "long":
       messageError.textContent = "O nome não pode ter mais de 120 letras";
+      containerNotification.classList.remove("hidden");
+      setTimeout(() => {
+        messageError.textContent = "";
+        containerNotification.classList.add("hidden");
+      }, 5000);
       break;
     case "invalid":
       messageError.textContent = "O nome pode conter apenas letras";
+      containerNotification.classList.remove("hidden");
+      setTimeout(() => {
+        messageError.textContent = "";
+        containerNotification.classList.add("hidden");
+      }, 5000);
       break;
     default:
-      // Se não houver erro, você pode prosseguir com a lógica normal
-      console.log(
-        `Nome: ${valueName} Data de Nascimento: ${valueBirthDateFormated}`
-      );
-      return; // Saia da função se não houver erro
+      criarTabela(valueName, valueBirthDateFormated);
+
+      // Recupera dados existentes ou inicializa um array vazio
+      let pessoas;
+      try {
+        pessoas = JSON.parse(localStorage.getItem("pessoas")) || [];
+      } catch {
+        pessoas = [];
+      }
+
+      // Adiciona nova pessoa ao array
+      pessoas.push({
+        nome: valueName,
+        dataNascimento: valueBirthDateFormated,
+      });
+
+      // Salva array atualizado no localStorage
+      localStorage.setItem("pessoas", JSON.stringify(pessoas));
+
+      // Limpa os campos
+      nameInput.value = "";
+      birthDateInput.value = "";
   }
-
-  // Mostrar a notificação de erro
-  containerNotification.classList.remove("hidden");
-  setTimeout(() => {
-    messageError.textContent = "";
-    containerNotification.classList.add("hidden");
-  }, 5000);
 }
 
-function formatDateToBrazilian(dateString) {
-  const [year, month, day] = dateString.split("-"); // Divide a string no formato YYYY-MM-DD
-  return `${day}/${month}/${year}`; // Retorna a data no formato DD/MM/AAAA
+// Função para carregar dados do localStorage
+function carregarDados() {
+  try {
+    const pessoas = JSON.parse(localStorage.getItem("pessoas")) || [];
+    pessoas.forEach((pessoa) => {
+      criarTabela(pessoa.nome, pessoa.dataNascimento);
+    });
+  } catch {
+    localStorage.setItem("pessoas", JSON.stringify([]));
+  }
 }
+
+// Chama a função quando a página carrega
+document.addEventListener("DOMContentLoaded", carregarDados);
