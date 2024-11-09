@@ -1,98 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="user.png" type="image/x-icon" />
-    <link href="/src/output.css" rel="stylesheet" />
-    <title>Cadastrar Pessoas</title>
-  </head>
-  <body
-    class="bg-gradient-to-t from-roxoEscuro to-roxoMedio bg-no-repeat h-screen font-mono text-branco"
-  >
-    <main class="w-full flex justify-center flex-col">
-      <div>
-        <div class="flex items-center w-full justify-center">
-          <span class="text-7xl">Cadastro de Pessoas</span>
-          <img
-            src="user.png"
-            alt="Imagem que remete a um usuário"
-            class="w-[4rem] ml-5"
-          />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="user.png" type="image/x-icon" />
+  <link href="/src/output.css" rel="stylesheet" />
+  <title>Cadastrar Pessoas</title>
+</head>
+
+<body class="bg-gradient-to-t from-black to-slate-600 bg-no-repeat h-screen font-mono text-branco">
+  <main class="w-full flex justify-center flex-col">
+    <div>
+      <div class="flex items-center w-full justify-center">
+        <span class="text-5xl">Filmes Favoritos</span>
+      </div>
+      <div class="w-full flex justify-center mt-10">
+        <form class="flex flex-col w-[40%] gap-5 js-form">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            for=":r63:-form-item">Nome do Filme</label>
+          <input id="name"
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+            placeholder="Insira o nome aqui" aria-describedby=":r63:-form-item-description" aria-invalid="false"
+            value="" name="username">
+          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            for=":r63:-form-item">Data do seu lançamento</label>
+          <input id="dataLançamento" type="date"
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+            placeholder="Insira a data aqui" aria-describedby=":r63:-form-item-description" aria-invalid="false"
+            value="" name="username">
+          <button id="submitButton"
+            class="shadow-2xl w-24 h-8 bg-branco rounded-lg uppercase cursor-pointer text-sm text-slate-700"
+            type="submit">
+            Salvar
+          </button>
+      </div>
+      </form>
+    </div>
+    </div>
+    <div class="flex justify-center w-full">
+      <div id="notificationError" role="alert" class="hidden w-[40%] mt-10">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Atenção
         </div>
-        <div class="w-full flex justify-center mt-10">
-          <form class="flex flex-col w-[60%] gap-5 js-form">
-            <div class="flex flex-col space-y-5">
-              <label class="font-semibold text-xl"
-                >Digite seu nome a baixo:
-              </label>
-              <input
-                type="text"
-                class="w-full h-12 rounded-xl pl-5 outline-none text-black"
-                id="name"
-              />
-              <div id="notificationError" role="alert" class="hidden">
-                <div
-                  class="bg-red-500 text-white font-bold rounded-t px-4 py-2"
-                >
-                  Atenção
-                </div>
-                <div
-                  class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700"
-                >
-                  <span id="messageError"></span>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col space-y-5">
-              <label class="font-semibold text-xl"
-                >Digite sua data de nascimento a baixo:
-              </label>
-              <input
-                type="date"
-                class="w-full h-12 rounded-xl px-5 outline-none text-black"
-                id="birth-date"
-              />
-            </div>
-            <div class="w-full flex justify-center">
-              <button
-                id="submitButton"
-                class="font-bold shadow-2xl w-64 h-14 bg-roxoMedio rounded-full uppercase"
-                type="submit"
-              >
-                Salvar informações
-              </button>
-            </div>
-          </form>
+        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <span id="messageError"></span>
         </div>
       </div>
-      <div class="px-4 py-8 sm:px-8">
-        <table
-          class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-roxoClaro text-sm shadow-sm"
-        >
-          <thead class="bg-roxoEscuro">
-            <tr class="text-white">
-              <th
-                class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-left"
-              >
-                Nome
-              </th>
-              <th
-                class="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-left"
-              >
-                Data de Nascimento
-              </th>
-            </tr>
-          </thead>
-          <tbody id="elementoContainer">
-            <tr>
-              <td class="border border-slate-300 dark:border-slate-700 p-4 text-black">Felipe</td>
-              <td class="border border-slate-300 dark:border-slate-700 p-4 text-black">26/05/2003</td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+    </div>
+    <div class="w-full justify-center flex">
+      <div class="px-4 py-8 sm:px-8 w-[50%]">
+        <div class="relative rounded-xl overflow-auto">
+          <div class="shadow-sm overflow-hidden my-8 rounded-xl">
+            <table class="border-collapse table-fixed w-full text-sm">
+              <thead class=" dark:bg-slate-800">
+                <tr>
+                  <th
+                    class="border-b dark:border-slate-600 font-medium p-4 pl-8  pb-3 text-slate-400 dark:text-slate-200 text-left">
+                    Nome do Filme
+                  </th>
+                  <th
+                    class="border-b dark:border-slate-600 font-medium p-4  pb-3 text-slate-400 dark:text-slate-200 text-left">
+                    Data de Lançamento
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-slate-800" id="elementoContainer">
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    </main>
-    <script src="./js/main.js" type="module"></script>
-  </body>
+    </div>
+  </main>
+  <script src="./js/main.js" type="module"></script>
+</body>
+
 </html>

@@ -1,11 +1,10 @@
-import criarTabela from "./criaTabela.js";
 import formatDateToBrazilian from "./dataBrasil.js";
+import validaFormulario from "./validaFormulario.js";
+import criarTabela from "./criaTabela.js";
 
 const nameInput = document.querySelector("#name");
-const birthDateInput = document.querySelector("#birth-date");
+const birthDateInput = document.querySelector("#dataLançamento");
 const buttonSubmit = document.querySelector("#submitButton");
-const messageError = document.querySelector("#messageError");
-const containerNotification = document.querySelector("#notificationError");
 
 buttonSubmit.addEventListener("click", mostraDados);
 
@@ -30,56 +29,13 @@ function mostraDados(event) {
     errorCode = "invalid";
   }
 
-  // Usando switch para lidar com os códigos de erro
-  switch (errorCode) {
-    case "short":
-      messageError.textContent = "O nome não pode ter menos de 3 letras";
-      containerNotification.classList.remove("hidden");
-      setTimeout(() => {
-        messageError.textContent = "";
-        containerNotification.classList.add("hidden");
-      }, 5000);
-      break;
-    case "long":
-      messageError.textContent = "O nome não pode ter mais de 120 letras";
-      containerNotification.classList.remove("hidden");
-      setTimeout(() => {
-        messageError.textContent = "";
-        containerNotification.classList.add("hidden");
-      }, 5000);
-      break;
-    case "invalid":
-      messageError.textContent = "O nome pode conter apenas letras";
-      containerNotification.classList.remove("hidden");
-      setTimeout(() => {
-        messageError.textContent = "";
-        containerNotification.classList.add("hidden");
-      }, 5000);
-      break;
-    default:
-      criarTabela(valueName, valueBirthDateFormated);
-
-      // Recupera dados existentes ou inicializa um array vazio
-      let pessoas;
-      try {
-        pessoas = JSON.parse(localStorage.getItem("pessoas")) || [];
-      } catch {
-        pessoas = [];
-      }
-
-      // Adiciona nova pessoa ao array
-      pessoas.push({
-        nome: valueName,
-        dataNascimento: valueBirthDateFormated,
-      });
-
-      // Salva array atualizado no localStorage
-      localStorage.setItem("pessoas", JSON.stringify(pessoas));
-
-      // Limpa os campos
-      nameInput.value = "";
-      birthDateInput.value = "";
-  }
+  validaFormulario(
+    errorCode,
+    valueName,
+    valueBirthDateFormated,
+    nameInput,
+    birthDateInput
+  );
 }
 
 // Função para carregar dados do localStorage
@@ -96,3 +52,20 @@ function carregarDados() {
 
 // Chama a função quando a página carrega
 document.addEventListener("DOMContentLoaded", carregarDados);
+
+function alterarFilme() {
+  const alterarButtons = document.querySelectorAll("[data-row-id]");
+
+  alterarButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const rowId = button.getAttribute("data-row-id");
+      const pessoas = JSON.parse(localStorage.getItem("pessoas"));
+      const pessoaSelecionada = pessoas.find((pessoa) => pessoa.id === rowId);
+
+      console.log(pessoas);
+    });
+  });
+}
+
+alterarFilme();
+document.addEventListener("DOMContentLoaded", alterarFilme);
